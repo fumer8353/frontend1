@@ -40,12 +40,10 @@ jobs:
         run: npm cache clean --force
       - name: Install dependencies
         run: npm ci
-        working-directory: Frontend
       - name: Build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://testbg-czbwgkfuddf9cuf4.eastasia-01.azurewebsites.net/api' }}
         run: npm run build
-        working-directory: Frontend
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -56,9 +54,9 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "Frontend" # App source code path
+          app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "Frontend/dist" # Built app content directory - optional
+          output_location: "dist" # Built app content directory - optional
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
